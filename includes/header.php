@@ -3,7 +3,7 @@ require_once __DIR__ . '/functions.php';
 requireLogin();
 ?>
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="auto">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,26 +15,10 @@ requireLogin();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/pharma-app/assets/css/style.css" rel="stylesheet">
+    <link href="/pharma-app/assets/css/responsive.css" rel="stylesheet">
     
-    <!-- Theme switcher -->
-    <script>
-        const getStoredTheme = () => localStorage.getItem('theme')
-        const setStoredTheme = theme => localStorage.setItem('theme', theme)
-        
-        const getPreferredTheme = () => {
-            const storedTheme = getStoredTheme()
-            if (storedTheme) {
-                return storedTheme
-            }
-            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-        }
-        
-        const setTheme = theme => {
-            document.documentElement.setAttribute('data-bs-theme', theme)
-        }
-        
-        setTheme(getPreferredTheme())
-    </script>
+    <!-- Theme: Light theme only, dark theme functionality removed -->
+    
 </head>
 <body>
     <!-- Navigation -->
@@ -123,13 +107,6 @@ requireLogin();
                                 <small class="text-muted">Rôle: <?= ucfirst($_SESSION['user_role']) ?></small>
                             </span></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <button class="dropdown-item" onclick="toggleTheme()">
-                                    <i class="bi bi-sun-fill" id="theme-icon"></i>
-                                    <span id="theme-text">Mode sombre</span>
-                                </button>
-                            </li>
-                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item text-danger" href="/pharma-app/auth/logout.php">
                                 <i class="bi bi-box-arrow-right"></i> Déconnexion
                             </a></li>
@@ -141,5 +118,5 @@ requireLogin();
     </nav>
     
     <!-- Main content wrapper -->
-    <div class="main-content" style="padding-top: 76px;">
+    <div class="main-content" style="padding-top:0px;">
         <div class="container-fluid">

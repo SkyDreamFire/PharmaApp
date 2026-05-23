@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <!DOCTYPE html>
-<html lang="fr" data-bs-theme="auto">
+<html lang="fr" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -106,10 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.15);
             max-width: 420px;
             width: 100%;
-        }
-        
-        [data-bs-theme="dark"] .login-card {
-            background: rgba(33, 37, 41, 0.95);
         }
         
         .brand-logo {
@@ -239,23 +235,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         Se connecter
     </button>
 </form>
-
-            <div class="demo-credentials bg-light p-3 rounded">
-                <h6 class="text-muted mb-2">
-                    <i class="bi bi-info-circle me-1"></i>
-                    Comptes de démonstration
-                </h6>
-                <div class="row">
-                    <div class="col-6">
-                        <strong>Directeur:</strong><br>
-                        <small>admin / password</small>
-                    </div>
-                    <div class="col-6">
-                        <strong>Caissier:</strong><br>
-                        <small>caissier1 / password</small>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     
@@ -275,24 +254,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 toggleIcon.className = 'bi bi-eye';
             }
         }
-        
-        // Theme detection
-        const getStoredTheme = () => localStorage.getItem('theme')
-        const setStoredTheme = theme => localStorage.setItem('theme', theme)
-        
-        const getPreferredTheme = () => {
-            const storedTheme = getStoredTheme()
-            if (storedTheme) {
-                return storedTheme
-            }
-            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-        }
-        
-        const setTheme = theme => {
-            document.documentElement.setAttribute('data-bs-theme', theme)
-        }
-        
-        setTheme(getPreferredTheme())
     </script>
 </body>
 </html>

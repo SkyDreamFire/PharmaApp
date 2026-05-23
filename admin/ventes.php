@@ -85,15 +85,15 @@ $ventes_par_jour = $db->select("
 <div class="card mb-4">
     <div class="card-body">
         <form method="GET" class="row g-3">
-            <div class="col-md-3">
+            <div class="col-sm-6 col-lg-3">
                 <label for="date_debut" class="form-label">Date début</label>
                 <input type="date" class="form-control" id="date_debut" name="date_debut" value="<?= $date_debut ?>">
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-6 col-lg-3">
                 <label for="date_fin" class="form-label">Date fin</label>
                 <input type="date" class="form-control" id="date_fin" name="date_fin" value="<?= $date_fin ?>">
             </div>
-            <div class="col-md-4">
+            <div class="col-sm-8 col-lg-4">
                 <label for="user_id" class="form-label">Vendeur</label>
                 <select class="form-select" id="user_id" name="user_id">
                     <option value="">Tous les vendeurs</option>
@@ -104,9 +104,9 @@ $ventes_par_jour = $db->select("
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-md-2 d-flex align-items-end">
+            <div class="col-sm-4 col-lg-2 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary w-100">
-                    <i class="bi bi-funnel me-1"></i>Filtrer
+                    <i class="bi bi-funnel me-1"></i><span class="d-none d-sm-inline">Filtrer</span>
                 </button>
             </div>
         </form>
@@ -114,37 +114,43 @@ $ventes_par_jour = $db->select("
 </div>
 
 <!-- Statistiques -->
-<div class="row mb-4">
-    <div class="col-md-4">
-        <div class="card stats-card">
-            <div class="card-body">
-                <div class="stats-icon bg-primary text-white">
+<div class="row mb-4 g-3">
+    <div class="col-sm-6 col-lg-4">
+        <div class="card stats-card h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="stats-icon bg-primary text-white me-3 flex-shrink-0">
                     <i class="bi bi-cart-check"></i>
                 </div>
-                <h3 class="stats-number text-primary"><?= number_format($stats['nb_ventes']) ?></h3>
-                <p class="stats-label">Ventes</p>
+                <div class="flex-grow-1">
+                    <h3 class="stats-number text-primary mb-1"><?= number_format($stats['nb_ventes']) ?></h3>
+                    <p class="stats-label mb-0">Ventes</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card stats-card">
-            <div class="card-body">
-                <div class="stats-icon bg-success text-white">
+    <div class="col-sm-6 col-lg-4">
+        <div class="card stats-card h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="stats-icon bg-success text-white me-3 flex-shrink-0">
                     <i class="bi bi-currency-euro"></i>
                 </div>
-                <h3 class="stats-number text-success"><?= formatPrice($stats['ca_total']) ?></h3>
-                <p class="stats-label">Chiffre d'affaires</p>
+                <div class="flex-grow-1">
+                    <h3 class="stats-number text-success mb-1"><?= formatPrice($stats['ca_total']) ?></h3>
+                    <p class="stats-label mb-0">Chiffre d'affaires</p>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card stats-card">
-            <div class="card-body">
-                <div class="stats-icon bg-info text-white">
+    <div class="col-sm-12 col-lg-4">
+        <div class="card stats-card h-100">
+            <div class="card-body d-flex align-items-center">
+                <div class="stats-icon bg-info text-white me-3 flex-shrink-0">
                     <i class="bi bi-basket"></i>
                 </div>
-                <h3 class="stats-number text-info"><?= formatPrice($stats['panier_moyen']) ?></h3>
-                <p class="stats-label">Panier moyen</p>
+                <div class="flex-grow-1">
+                    <h3 class="stats-number text-info mb-1"><?= formatPrice($stats['panier_moyen']) ?></h3>
+                    <p class="stats-label mb-0">Panier moyen</p>
+                </div>
             </div>
         </div>
     </div>
@@ -160,7 +166,9 @@ $ventes_par_jour = $db->select("
         </h5>
     </div>
     <div class="card-body">
-        <canvas id="ventesChart" height="100"></canvas>
+        <div class="chart-container position-relative" style="height: 400px;">
+            <canvas id="ventesChart"></canvas>
+        </div>
     </div>
 </div>
 <?php endif; ?>
@@ -236,11 +244,13 @@ $ventes_par_jour = $db->select("
                             </td>
                             <td>
                                 <div class="action-buttons">
-                                    <button class="btn btn-sm btn-outline-primary" onclick="voirDetails(<?= $vente['id'] ?>)">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="voirDetails(<?= $vente['id'] ?>)" title="Voir détails">
                                         <i class="bi bi-eye"></i>
+                                        <span class="d-none d-md-inline ms-1">Détails</span>
                                     </button>
-                                    <button class="btn btn-sm btn-outline-secondary" onclick="imprimerFacture(<?= $vente['id'] ?>)">
+                                    <button class="btn btn-sm btn-outline-secondary" onclick="imprimerFacture(<?= $vente['id'] ?>)" title="Imprimer">
                                         <i class="bi bi-printer"></i>
+                                        <span class="d-none d-md-inline ms-1">Imprimer</span>
                                     </button>
                                 </div>
                             </td>
@@ -254,11 +264,11 @@ $ventes_par_jour = $db->select("
 
 <!-- Modal détails vente -->
 <div class="modal fade" id="detailsModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Détails de la vente</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
             </div>
             <div class="modal-body" id="detailsContent">
                 <!-- Contenu chargé dynamiquement -->
@@ -294,16 +304,46 @@ const ventesChart = new Chart(ctx, {
     },
     options: {
         responsive: true,
+        maintainAspectRatio: false,
         interaction: {
             mode: 'index',
             intersect: false,
+        },
+        plugins: {
+            legend: {
+                display: true,
+                position: window.innerWidth < 768 ? 'bottom' : 'top',
+                labels: {
+                    padding: window.innerWidth < 768 ? 10 : 20,
+                    font: {
+                        size: window.innerWidth < 768 ? 10 : 12
+                    }
+                }
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+                titleFont: {
+                    size: window.innerWidth < 768 ? 12 : 14
+                },
+                bodyFont: {
+                    size: window.innerWidth < 768 ? 11 : 13
+                }
+            }
         },
         scales: {
             x: {
                 display: true,
                 title: {
-                    display: true,
+                    display: window.innerWidth >= 576,
                     text: 'Date'
+                },
+                ticks: {
+                    maxRotation: window.innerWidth < 768 ? 45 : 0,
+                    font: {
+                        size: window.innerWidth < 768 ? 10 : 12
+                    },
+                    maxTicksLimit: window.innerWidth < 576 ? 5 : (window.innerWidth < 768 ? 7 : 10)
                 }
             },
             y: {
@@ -311,25 +351,67 @@ const ventesChart = new Chart(ctx, {
                 display: true,
                 position: 'left',
                 title: {
-                    display: true,
-                    text: 'Nombre de ventes'
+                    display: window.innerWidth >= 768,
+                    text: 'Ventes'
+                },
+                ticks: {
+                    font: {
+                        size: window.innerWidth < 768 ? 10 : 12
+                    }
                 }
             },
             y1: {
                 type: 'linear',
-                display: true,
+                display: window.innerWidth >= 576,
                 position: 'right',
                 title: {
-                    display: true,
-                    text: 'Chiffre d\'affaires (€)'
+                    display: window.innerWidth >= 768,
+                    text: 'CA (€)'
                 },
                 grid: {
                     drawOnChartArea: false,
                 },
+                ticks: {
+                    font: {
+                        size: window.innerWidth < 768 ? 10 : 12
+                    }
+                }
             }
         }
     }
 });
+
+// Fonction pour redimensionner le graphique
+function resizeChart() {
+    if (ventesChart) {
+        ventesChart.options.plugins.legend.position = window.innerWidth < 768 ? 'bottom' : 'top';
+        ventesChart.options.plugins.legend.labels.padding = window.innerWidth < 768 ? 10 : 20;
+        ventesChart.options.plugins.legend.labels.font.size = window.innerWidth < 768 ? 10 : 12;
+        ventesChart.options.scales.x.title.display = window.innerWidth >= 576;
+        ventesChart.options.scales.x.ticks.maxRotation = window.innerWidth < 768 ? 45 : 0;
+        ventesChart.options.scales.x.ticks.maxTicksLimit = window.innerWidth < 576 ? 5 : (window.innerWidth < 768 ? 7 : 10);
+        ventesChart.options.scales.y.title.display = window.innerWidth >= 768;
+        ventesChart.options.scales.y1.display = window.innerWidth >= 576;
+        ventesChart.options.scales.y1.title.display = window.innerWidth >= 768;
+        ventesChart.update('resize');
+    }
+}
+
+// Écouter les changements de taille d'écran
+window.addEventListener('resize', debounce(resizeChart, 250));
+
+// Fonction de débounce pour optimiser les performances
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
 <?php endif; ?>
 
 async function voirDetails(venteId) {

@@ -86,84 +86,94 @@ $top_medicaments = $db->select("
 <div class="alert-container"></div>
 
 <!-- Statistiques principales -->
-<div class="row mb-4">
-    <div class="col-xl-3 col-md-6 mb-3">
+<div class="row mb-4 g-3">
+    <div class="col-sm-6 col-lg-3">
         <div class="card stats-card h-100">
-            <div class="card-body">
-                <div class="stats-icon bg-primary text-white">
+            <div class="card-body d-flex align-items-center">
+                <div class="stats-icon bg-primary text-white me-3 flex-shrink-0">
                     <i class="bi bi-capsule"></i>
                 </div>
-                <h2 class="stats-number text-primary"><?= number_format($stats['total_medicaments']) ?></h2>
-                <p class="stats-label">Médicaments</p>
+                <div class="flex-grow-1">
+                    <h2 class="stats-number text-primary mb-1"><?= number_format($stats['total_medicaments']) ?></h2>
+                    <p class="stats-label mb-0">Médicaments</p>
+                </div>
             </div>
         </div>
     </div>
     
-    <div class="col-xl-3 col-md-6 mb-3">
+    <div class="col-sm-6 col-lg-3">
         <div class="card stats-card h-100">
-            <div class="card-body">
-                <div class="stats-icon bg-success text-white">
+            <div class="card-body d-flex align-items-center">
+                <div class="stats-icon bg-success text-white me-3 flex-shrink-0">
                     <i class="bi bi-truck"></i>
                 </div>
-                <h2 class="stats-number text-success"><?= number_format($stats['total_fournisseurs']) ?></h2>
-                <p class="stats-label">Fournisseurs</p>
+                <div class="flex-grow-1">
+                    <h2 class="stats-number text-success mb-1"><?= number_format($stats['total_fournisseurs']) ?></h2>
+                    <p class="stats-label mb-0">Fournisseurs</p>
+                </div>
             </div>
         </div>
     </div>
     
-    <div class="col-xl-3 col-md-6 mb-3">
+    <div class="col-sm-6 col-lg-3">
         <div class="card stats-card h-100">
-            <div class="card-body">
-                <div class="stats-icon bg-info text-white">
+            <div class="card-body d-flex align-items-center">
+                <div class="stats-icon bg-info text-white me-3 flex-shrink-0">
                     <i class="bi bi-people"></i>
                 </div>
-                <h2 class="stats-number text-info"><?= number_format($stats['total_users']) ?></h2>
-                <p class="stats-label">Utilisateurs</p>
+                <div class="flex-grow-1">
+                    <h2 class="stats-number text-info mb-1"><?= number_format($stats['total_users']) ?></h2>
+                    <p class="stats-label mb-0">Utilisateurs</p>
+                </div>
             </div>
         </div>
     </div>
     
-    <div class="col-xl-3 col-md-6 mb-3">
+    <div class="col-sm-6 col-lg-3">
         <div class="card stats-card h-100">
-            <div class="card-body">
-                <div class="stats-icon bg-warning text-white">
+            <div class="card-body d-flex align-items-center">
+                <div class="stats-icon bg-warning text-white me-3 flex-shrink-0">
                     <i class="bi bi-cart"></i>
                 </div>
-                <h2 class="stats-number text-warning"><?= number_format($stats['ventes_aujourd_hui']) ?></h2>
-                <p class="stats-label">Ventes aujourd'hui</p>
+                <div class="flex-grow-1">
+                    <h2 class="stats-number text-warning mb-1"><?= number_format($stats['ventes_aujourd_hui']) ?></h2>
+                    <p class="stats-label mb-0">Ventes aujourd'hui</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Chiffre d'affaires -->
-<div class="row mb-4">
-    <div class="col-md-6 mb-3">
+<div class="row mb-4 g-3">
+    <div class="col-md-6">
         <div class="card h-100">
             <div class="card-header card-gradient-success">
                 <h5 class="mb-0">
                     <i class="bi bi-currency-euro me-2"></i>
-                    CA Aujourd'hui
+                    <span class="d-none d-sm-inline">CA Aujourd'hui</span>
+                    <span class="d-sm-none">Aujourd'hui</span>
                 </h5>
             </div>
             <div class="card-body d-flex align-items-center justify-content-center">
-                <h2 class="display-4 text-success mb-0">
+                <h2 class="display-6 display-md-4 text-success mb-0">
                     <?= formatPrice($stats['ca_aujourd_hui']) ?>
                 </h2>
             </div>
         </div>
     </div>
     
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6">
         <div class="card h-100">
             <div class="card-header card-gradient-info">
                 <h5 class="mb-0">
                     <i class="bi bi-calendar-month me-2"></i>
-                    CA Ce Mois
+                    <span class="d-none d-sm-inline">CA Ce Mois</span>
+                    <span class="d-sm-none">Ce Mois</span>
                 </h5>
             </div>
             <div class="card-body d-flex align-items-center justify-content-center">
-                <h2 class="display-4 text-info mb-0">
+                <h2 class="display-6 display-md-4 text-info mb-0">
                     <?= formatPrice($stats['ca_mois']) ?>
                 </h2>
             </div>
@@ -171,7 +181,7 @@ $top_medicaments = $db->select("
     </div>
 </div>
 
-<div class="row">
+<div class="row g-3">
     <!-- Alertes de stock -->
     <div class="col-lg-6 mb-4">
         <div class="card h-100">
@@ -206,6 +216,7 @@ $top_medicaments = $db->select("
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
+                <br>  
                 <?php if (empty($expirations)): ?>
                     <div class="text-center py-4">
                         <i class="bi bi-check-circle text-success" style="font-size: 3rem;"></i>
@@ -248,7 +259,7 @@ $top_medicaments = $db->select("
                     <i class="bi bi-clock-history me-2"></i>
                     Dernières Ventes
                 </h5>
-                <a href="/pharma-app/admin/ventes.php" class="btn btn-sm btn-outline-primary">
+                <a href="/pharma-app/admin/ventes.php" class="btn btn-sm btn-outline-primary text-light">
                     Voir tout
                 </a>
             </div>

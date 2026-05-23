@@ -40,7 +40,7 @@ $alertes_stock = $db->select("SELECT * FROM stock_alerts ORDER BY stock_actuel A
 <div class="alert-container"></div>
 
 <!-- Statistiques principales -->
-<div class="row mb-4">
+<div class="row">
     <div class="col-xl-3 col-md-6 mb-3">
         <div class="card stats-card h-100">
             <div class="card-body">

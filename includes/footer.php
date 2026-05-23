@@ -6,33 +6,14 @@
     <!-- Custom JS -->
     <script src="/pharma-app/assets/js/app.js"></script>
     
-    <!-- Theme switcher script -->
+    <!-- Nettoyage des préférences de thème -->
     <script>
-        function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            setTheme(newTheme);
-            setStoredTheme(newTheme);
-            updateThemeButton();
+        // Supprimer les préférences de thème stockées et forcer le thème clair
+        if (localStorage.getItem('theme')) {
+            localStorage.removeItem('theme');
         }
-        
-        function updateThemeButton() {
-            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
-            const themeIcon = document.getElementById('theme-icon');
-            const themeText = document.getElementById('theme-text');
-            
-            if (currentTheme === 'dark') {
-                themeIcon.className = 'bi bi-moon-fill';
-                themeText.textContent = 'Mode clair';
-            } else {
-                themeIcon.className = 'bi bi-sun-fill';
-                themeText.textContent = 'Mode sombre';
-            }
-        }
-        
-        // Initialize theme button on page load
-        document.addEventListener('DOMContentLoaded', updateThemeButton);
+        // S'assurer que le thème est bien défini sur 'light'
+        document.documentElement.setAttribute('data-bs-theme', 'light');
     </script>
 </body>
 </html>
