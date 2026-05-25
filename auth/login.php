@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - FIANGEP Pharma</title>
+    <title>Connexion - FIANGEP</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -90,12 +90,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <style>
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            /* Dark overlay + pharmacy‑lab image */
+            background: linear-gradient(rgba(10, 103, 203, 0.3), rgba(96, 29, 111, 0)), url('/pharma-app/image/login.png');
+            background-size: cover;
+            background-position: right center; /* focus on professional on the right */
+            background-repeat: no-repeat;
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            padding: 1rem;
+            justify-content: flex-end; /* align form to the right side */
+            padding: 1rem 15%;
         }
         
         .login-card {
@@ -127,19 +131,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1035a3ff 0%, #1766c1ff 100%);
             border: none;
             padding: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
+            font-weight: 700;
+            border-radius:15px;
             letter-spacing: 0.5px;
         }
         
         .demo-credentials {
             font-size: 0.875rem;
             line-height: 1.4;
-        }
-        
+        }     
+    
+
         /* Responsive adjustments */
         @media (max-width: 576px) {
             body {
@@ -178,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="card-body p-5">
             <div class="text-center mb-4">
                 <i class="bi bi-capsule-pill brand-logo"></i>
-                <h2 class="h3 mb-3 font-weight-normal">Pharmacie Management</h2>
+            <h2 class="h3 mb-3 font-weight-normal">FIANGEP Pharma</h2>
                 <p class="text-muted">Connectez-vous à votre compte</p>
             </div>
             
@@ -186,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <i class="bi bi-exclamation-circle me-2"></i>
                     <?= escape($error) ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <button style="font-size:10px; margin-top:-10px; margin-right:-10px; color:red; font-weight:700;" type="button" class="btn-close" data-bs-dismiss="alert"></button>
                 </div>
             <?php endif; ?>
             
@@ -197,13 +202,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="mb-3">
         <label for="username" class="form-label">Nom d'utilisateur ou Email</label>
         <div class="input-group">
-            <span class="input-group-text bg-transparent border-end-0">
-                <i class="bi bi-person"></i>
+            <span class="input-group-text bg-transparent border-end-0" style="border:none;">
+                <i class="bi bi-person" ></i>
             </span>
             <input type="text" 
                    class="form-control border-start-0" 
                    id="username" 
                    name="username" 
+                   placeholder="Nom d'utilisateur ou Email"
                    required 
                    autocomplete="username"
                    value="<?= escape($_POST['username'] ?? '') ?>">
@@ -213,16 +219,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="mb-4">
         <label for="password" class="form-label">Mot de passe</label>
         <div class="input-group">
-            <span class="input-group-text bg-transparent border-end-0">
+            <span class="input-group-text bg-transparent border-end-0" style="border:none;">
                 <i class="bi bi-lock"></i>
             </span>
             <input type="password" 
                    class="form-control border-start-0" 
                    id="password" 
                    name="password" 
+                   placeholder="Mot de passe"
                    required 
                    autocomplete="current-password">
-            <button class="btn btn-outline-secondary border-start-0" 
+            <button class="btn btn-outline-secondary eye" style="border:none;"
                     type="button" 
                     onclick="togglePassword()">
                 <i class="bi bi-eye" id="toggleIcon"></i>
@@ -230,10 +237,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <button type="submit" class="btn btn-login btn-primary w-100 mb-3">
+    <center><button type="submit" class="btn btn-login btn-primary w-98 mb-3">
         <i class="bi bi-box-arrow-in-right me-2"></i>
-        Se connecter
-    </button>
+        Se Connecter
+    </button></center>
 </form>
         </div>
     </div>
