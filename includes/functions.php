@@ -52,6 +52,9 @@ if (!function_exists('redirectByRole')) {
             case 'directeur':
                 header('Location: /pharma-app/admin/dashboard.php');
                 break;
+            case 'magasinier':
+                header('Location: /pharma-app/magasinier/dashboard.php');
+                break;
             case 'caissier':
                 header('Location: /pharma-app/caissier/dashboard.php');
                 break;

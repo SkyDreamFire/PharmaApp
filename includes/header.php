@@ -24,7 +24,7 @@ requireLogin();
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" style="padding-right: 50px;" href="<?= $_SESSION['user_role'] === 'directeur' ? '/pharma-app/admin/dashboard.php' : '/pharma-app/caissier/dashboard.php' ?>">
+            <a class="navbar-brand" style="padding-right: 50px;" href="<?= $_SESSION['user_role'] === 'directeur' ? '/pharma-app/admin/dashboard.php' : ($_SESSION['user_role'] === 'magasinier' ? '/pharma-app/magasinier/dashboard.php' : '/pharma-app/caissier/dashboard.php') ?>">
                 <i class="bi bi-capsule-pill me-2"></i>
                 FIANGEP Pharma
             </a>
@@ -57,13 +57,44 @@ requireLogin();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light " href="/pharma-app/admin/ventes.php">
+                            <a class="nav-link text-light" href="/pharma-app/admin/ventes.php">
                                 <i class="bi bi-cart"></i> Ventes
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/pharma-app/admin/commandes_fournisseurs.php">
+                                <i class="bi bi-file-earmark-text"></i> Commandes
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-light" href="/pharma-app/admin/stock_alert.php">
                                 <i class="bi bi-exclamation-triangle"></i> Alertes Stock
+                            </a>
+                        </li>
+                    <?php elseif ($_SESSION['user_role'] === 'magasinier'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/pharma-app/magasinier/dashboard.php">
+                                <i class="bi bi-speedometer2"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/pharma-app/magasinier/produits.php">
+                                <i class="bi bi-capsule"></i> Médicaments
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/pharma-app/magasinier/stock_mouvement.php">
+                                <i class="bi bi-arrow-up-down"></i> Stock
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/pharma-app/magasinier/fournisseurs.php">
+                                <i class="bi bi-truck"></i> Fournisseurs
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/pharma-app/magasinier/commandes_fournisseurs.php">
+                                <i class="bi bi-file-earmark-text"></i> Commandes
                             </a>
                         </li>
                     <?php else: ?>

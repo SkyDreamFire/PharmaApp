@@ -147,20 +147,20 @@ $users = $db->select("
 </div>
 
 <!-- Statistiques -->
-<div class="row mb-4">
-    <div class="col-md-3">
-        <div class="card stats-card">
+<div class="row mb-4 g-3">
+    <div class="col">
+        <div class="card stats-card h-100">
             <div class="card-body">
                 <div class="stats-icon bg-primary text-white">
                     <i class="bi bi-people"></i>
                 </div>
                 <h3 class="stats-number text-primary"><?= count(array_filter($users, fn($u) => $u['actif'])) ?></h3>
-                <p class="stats-label">Utilisateurs actifs</p>
+                <p class="stats-label">Actifs</p>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="card stats-card">
+    <div class="col">
+        <div class="card stats-card h-100">
             <div class="card-body">
                 <div class="stats-icon bg-success text-white">
                     <i class="bi bi-person-badge"></i>
@@ -170,19 +170,30 @@ $users = $db->select("
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="card stats-card">
+    <div class="col">
+        <div class="card stats-card h-100">
             <div class="card-body">
                 <div class="stats-icon bg-info text-white">
-                    <i class="bi bi-person"></i>
+                    <i class="bi bi-shop"></i>
                 </div>
-                <h3 class="stats-number text-info"><?= count(array_filter($users, fn($u) => $u['role'] === 'caissier')) ?></h3>
+                <h3 class="stats-number text-info"><?= count(array_filter($users, fn($u) => $u['role'] === 'magasinier')) ?></h3>
+                <p class="stats-label">Magasiniers</p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card stats-card h-100">
+            <div class="card-body">
+                <div class="stats-icon bg-secondary text-white">
+                    <i class="bi bi-cash-coin"></i>
+                </div>
+                <h3 class="stats-number text-secondary"><?= count(array_filter($users, fn($u) => $u['role'] === 'caissier')) ?></h3>
                 <p class="stats-label">Caissiers</p>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="card stats-card">
+    <div class="col">
+        <div class="card stats-card h-100">
             <div class="card-body">
                 <div class="stats-icon bg-warning text-white">
                     <i class="bi bi-person-x"></i>
@@ -208,6 +219,7 @@ $users = $db->select("
                 <select class="form-select" id="roleFilter">
                     <option value="">Tous les rôles</option>
                     <option value="directeur">Directeur</option>
+                    <option value="magasinier">Magasinier</option>
                     <option value="caissier">Caissier</option>
                 </select>
             </div>
@@ -259,7 +271,12 @@ $users = $db->select("
                                 </div>
                             </td>
                             <td data-sort="role">
-                                <span class="badge <?= $user['role'] === 'directeur' ? 'bg-primary' : 'bg-secondary' ?>">
+                                <?php 
+                                $badgeClass = 'bg-secondary';
+                                if ($user['role'] === 'directeur') $badgeClass = 'bg-primary';
+                                elseif ($user['role'] === 'magasinier') $badgeClass = 'bg-info text-dark';
+                                ?>
+                                <span class="badge <?= $badgeClass ?>">
                                     <?= ucfirst($user['role']) ?>
                                 </span>
                             </td>
@@ -345,6 +362,7 @@ $users = $db->select("
                             <label for="role" class="form-label">Rôle *</label>
                             <select class="form-select" id="role" name="role" required>
                                 <option value="caissier">Caissier</option>
+                                <option value="magasinier">Magasinier</option>
                                 <option value="directeur">Directeur</option>
                             </select>
                         </div>
