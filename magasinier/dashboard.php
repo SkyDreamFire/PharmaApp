@@ -38,7 +38,7 @@ $alertes_stock = $db->select("SELECT * FROM stock_alerts ORDER BY stock_actuel A
     <div class="container-fluid">
         <h1 class="page-title">
             <i class="bi bi-speedometer2 me-2"></i>
-            Dashboard Magasinier (Gestion des Stocks)
+            Dashboard Magasinier
         </h1>
         <p class="page-subtitle">Bonjour <?= escape($_SESSION['user_prenom']) ?>, bon suivi logistique !</p>
     </div>
@@ -146,10 +146,10 @@ $alertes_stock = $db->select("SELECT * FROM stock_alerts ORDER BY stock_actuel A
         <div class="card h-100">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">
-                    <i class="bi bi-clock-history me-2"></i>
+                    <i class="bi bi-clock-history me-2 "></i>
                     Ravitaillements Récents
                 </h5>
-                <a href="/pharma-app/magasinier/stock_mouvement.php" class="btn btn-sm btn-outline-primary">
+                <a href="/pharma-app/magasinier/stock_mouvement.php" class="text-light btn btn-sm btn-outline-primary">
                     Voir tout
                 </a>
             </div>
@@ -193,7 +193,7 @@ $alertes_stock = $db->select("SELECT * FROM stock_alerts ORDER BY stock_actuel A
                     <i class="bi bi-exclamation-triangle text-warning me-2"></i>
                     Alerte Ruptures
                 </h5>
-                <a href="/pharma-app/magasinier/commandes_fournisseurs.php" class="btn btn-sm btn-outline-danger">
+                <a href="/pharma-app/magasinier/commandes_fournisseurs.php" class="btn btn-sm btn-outline-primary text-light">
                     Commander
                 </a>
             </div>

@@ -115,8 +115,8 @@ $stats = [
                     Alertes de Stock (<?= count($alertes) ?>)
                 </h5>
                 <?php if (!empty($alertes)): ?>
-                    <button class="btn btn-outline-primary btn-sm" onclick="genererCommande()">
-                        <i class="bi bi-cart-plus me-1"></i>Générer commande
+                    <button class="btn btn-outline-primary btn-sm">
+                        <a href="/pharma-app/admin/commandes_fournisseurs.php" style="color: white; text-decoration:none"><i class="bi bi-cart-plus me-1"></i>Générer commande</a>
                     </button>
                 <?php endif; ?>
             </div>

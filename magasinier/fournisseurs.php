@@ -95,7 +95,7 @@ $fournisseurs = $db->select("SELECT f.*,
             <div>
                 <h1 class="page-title">
                     <i class="bi bi-truck me-2"></i>
-                    Gestion des Fournisseurs (Magasin)
+                    Gestion des Fournisseurs
                 </h1>
                 <p class="page-subtitle">Consultez et gérez vos partenaires fournisseurs</p>
             </div>

@@ -145,7 +145,7 @@ if ($isHistoryMode) {
                         Nouvelle Commande
                     </a>
                 <?php else: ?>
-                    <a href="?history=1" class="btn btn-outline-primary me-2">
+                    <a href="?history=1" class="btn btn-light me-2 text-primary">
                         <i class="bi bi-clock-history me-2"></i>
                         Historique
                     </a>
@@ -317,7 +317,7 @@ if ($isHistoryMode) {
                         <i class="bi bi-list-ul me-2"></i>
                         Bon de commande (<span id="panierCount">0</span>)
                     </h5>
-                    <button class="btn btn-sm btn-outline-danger" onclick="viderPanier()">
+                    <button class="btn btn-sm btn-danger" onclick="viderPanier()">
                         <i class="bi bi-trash"></i>
                     </button>
                 </div>

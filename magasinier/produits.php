@@ -132,7 +132,7 @@ $fournisseurs = $db->select("SELECT * FROM fournisseurs WHERE actif = 1 ORDER BY
             <div>
                 <h1 class="page-title">
                     <i class="bi bi-capsule me-2"></i>
-                    Gestion des Médicaments (Magasin)
+                    Gestion des Médicaments 
                 </h1>
                 <p class="page-subtitle">Gérez le catalogue des médicaments de la pharmacie</p>
             </div>
