@@ -107,7 +107,7 @@ $medicaments = $db->select("
 ");
 
 $fournisseurs = $db->select("
-    SELECT id, nom, contact, telephone
+    SELECT id, nom, contact_principal, telephone
     FROM fournisseurs 
     WHERE actif = 1 
     ORDER BY nom ASC
@@ -209,6 +209,9 @@ if ($isHistoryMode) {
                                     <button class="btn btn-sm btn-outline-primary" onclick="modifierStatut(<?= $cmd['id'] ?>, '<?= $cmd['statut'] ?>', '<?= escape($cmd['numero_commande']) ?>')" title="Modifier statut">
                                         <i class="bi bi-pencil"></i>
                                     </button>
+                                    <a href="/pharma-app/api/commandes.php?action=print&id=<?= $cmd['id'] ?>" target="_blank" class="btn btn-sm btn-outline-secondary" title="Imprimer le bon de commande">
+                                        <i class="bi bi-printer"></i>
+                                    </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>

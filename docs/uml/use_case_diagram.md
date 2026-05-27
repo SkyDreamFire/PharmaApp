@@ -19,7 +19,7 @@ graph LR
     Caissier["👤 Caissier"]:::actor
 
     %% Système
-    subgraph Système PharmaApp
+    subgraph SysPharma["Système PharmaApp"]
         direction TB
         
         %% Authentification
@@ -70,7 +70,7 @@ graph LR
     %% Relations d'inclusion (Include)
     UC_Vente -.->|include| UC_Print
 
-    style Système PharmaApp fill:#f8fafc,stroke:#cbd5e1,stroke-width:2px;
+    style SysPharma fill:#f8fafc,stroke:#cbd5e1,stroke-width:2px;
 ```
 
 ---

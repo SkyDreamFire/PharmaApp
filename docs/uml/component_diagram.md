@@ -15,7 +15,7 @@ graph TD
     classDef helper fill:#fff7ed,stroke:#ea580c,stroke-width:1.5px,color:#7c2d12;
 
     %% Couche Client / Browser
-    subgraph Couche Présentation (Client Browser)
+    subgraph CouchePresentation["Couche Présentation (Client Browser)"]
         direction LR
         UI["🖥️ Interface Bootstrap 5 / HTML"]:::browser
         JS_Cart["⚡ Panier Dynamique (app.js / facture.js)"]:::browser
@@ -23,23 +23,23 @@ graph TD
     end
 
     %% Couche Application / PHP
-    subgraph Couche Applicative (PHP Server)
+    subgraph CoucheApplicative["Couche Applicative (PHP Server)"]
         direction TB
         
         %% Composant Authentification
-        subgraph Authentification et Sessions
+        subgraph AuthSession["Authentification et Sessions"]
             Auth_Comp["🔑 Module d'Accès (login.php / logout.php)"]:::php
         end
         
         %% Composants Caissier
-        subgraph Module Métier Caissier
+        subgraph ModCaissier["Module Métier Caissier"]
             C_Facture["🧾 Facturation (facture.php)"]:::php
             C_Clients["👥 Gestion Clients (clients.php)"]:::php
             C_Mvt["📦 Mouvements Stock (stock_mouvement.php)"]:::php
         end
         
         %% Composants Admin
-        subgraph Module Métier Directeur (Admin)
+        subgraph ModDirecteur["Module Métier Directeur (Admin)"]
             A_Prod["💊 Gestion Produits (produits.php)"]:::php
             A_Fourn["🏢 Gestion Fournisseurs (fournisseurs.php)"]:::php
             A_Staff["👥 Gestion Personnel (personnel.php)"]:::php
@@ -47,20 +47,20 @@ graph TD
         end
 
         %% Composant API
-        subgraph API & Services Internes
-            API_Print["🖨️ API Ventes & Recus (api/ventes.php)"]:::php
+        subgraph ApiServices["API et Services Internes"]
+            API_Print["🖨️ API Ventes et Recus (api/ventes.php)"]:::php
         end
 
         %% Composant Helpers
-        subgraph Helpers & Coeur d'Application (includes/)
+        subgraph HelpersCoeur["Helpers et Coeur d'Application (includes/)"]
             H_Render["🎨 Rendus HTML (header.php / footer.php)"]:::helper
-            H_Biz["🧠 Logique Métier FEFO & CSRF (functions.php)"]:::helper
+            H_Biz["🧠 Logique Métier FEFO et CSRF (functions.php)"]:::helper
             DB_Wrapper["🔌 Connecteur Singleton DB (db.php)"]:::helper
         end
     end
 
     %% Couche Persistance
-    subgraph Couche Persistance (MySQL)
+    subgraph CouchePersistance["Couche Persistance (MySQL)"]
         DB_Store[("🗄️ Base de données SQL<br/>pharma_db")]:::db
     end
 
@@ -90,11 +90,11 @@ graph TD
     API_Print ====>|requêtes PDO| DB_Wrapper
     
     %% Connexion physique BDD
-    DB_Wrapper ====>|TCP/IP Port 3306 (PDO connection)| DB_Store
+    DB_Wrapper ====>|TCP/IP Port 3306 - PDO connection| DB_Store
 
-    style Couche Présentation (Client Browser) fill:#f8fafc,stroke:#3b82f6,stroke-width:2px;
-    style Couche Applicative (PHP Server) fill:#fdf4ff,stroke:#c084fc,stroke-width:2px;
-    style Couche Persistance (MySQL) fill:#f0fdf4,stroke:#4ade80,stroke-width:2px;
+    style CouchePresentation fill:#f8fafc,stroke:#3b82f6,stroke-width:2px;
+    style CoucheApplicative fill:#fdf4ff,stroke:#c084fc,stroke-width:2px;
+    style CouchePersistance fill:#f0fdf4,stroke:#4ade80,stroke-width:2px;
 ```
 
 ---

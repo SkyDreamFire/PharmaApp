@@ -17,21 +17,21 @@ flowchart TD
     Start([🟢 Début du processus de vente]):::start_end
     
     %% Section Client
-    subgraph Côté Caissier (Front-End)
+    subgraph CaissFE["Côté Caissier (Front-End)"]
         A1[Rechercher un médicament dans la liste]:::action
-        A2[Cliquer sur "Ajouter au Panier"]:::action
+        A2[Cliquer sur Ajouter au Panier]:::action
         
         D1{Stock total cumulé<br/>suffisant ?}:::decision
         
         A3[Afficher une alerte de stock insuffisant]:::action
-        A4[Mettre à jour le panier & recalculer le total]:::action
+        A4[Mettre à jour le panier et recalculer le total]:::action
         A5[Optionnel: Associer un client et saisir une remise]:::action
         A6[Sélectionner le mode de paiement]:::action
-        A7[Cliquer sur "Valider la Facture" & Confirmer]:::action
+        A7[Cliquer sur Valider la Facture et Confirmer]:::action
     end
 
     %% Section Serveur
-    subgraph Côté Serveur (Back-End PHP & FEFO)
+    subgraph ServeurBE["Côté Serveur (Back-End PHP et FEFO)"]
         S1[Recevoir la requête POST et décoder le JSON]:::action
         S2[Débuter la transaction SQL PDO]:::action
         S3[Générer le N° de facture unique]:::action
@@ -123,8 +123,8 @@ flowchart TD
     A8 --> End
 
     %% Styles supplémentaires pour le rendu
-    style Côté Caissier (Front-End) fill:#eff6ff,stroke:#bfdbfe,stroke-width:2px;
-    style Côté Serveur (Back-End PHP & FEFO) fill:#fafafa,stroke:#e4e4e7,stroke-width:2px;
+    style CaissFE fill:#eff6ff,stroke:#bfdbfe,stroke-width:2px;
+    style ServeurBE fill:#fafafa,stroke:#e4e4e7,stroke-width:2px;
 ```
 
 ---

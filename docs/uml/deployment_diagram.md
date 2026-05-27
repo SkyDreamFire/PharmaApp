@@ -51,7 +51,7 @@ flowchart TB
 
     %% Connexions physiques / protocoles de communication
     Browser ====>|Procolole : HTTP / HTTPS<br/>Ports : 80 / 443| Web_Server
-    PHPEngine ====>|Protocole : TCP/IP (PDO Driver)<br/>Port par défaut : 3306 (localhost)| DBMS
+    PHPEngine ====>|Protocole TCP/IP via PDO Driver - Port 3306 localhost| DBMS
 
     %% Styles des subgraphs globaux
     style Client_Device fill:#f8fafc,stroke:#3b82f6,stroke-width:2px;
