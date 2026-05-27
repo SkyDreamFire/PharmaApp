@@ -89,10 +89,10 @@ if ($action === 'print') {
             <div>
                 <h3>Émetteur (Pharmacie)</h3>
                 <p>
-                    <strong>PHARMACIE MANAGEMENT</strong><br>
-                    123 Rue de la Santé<br>
-                    75000 Paris<br>
-                    Tél: 01 23 45 67 89<br><br>
+                    <strong>FIANGEP PHARMA</strong><br>
+                    Quartier Administratif<br>
+                    Dschang, Ouest<br>
+                    Tél: +237 6 53 36 83 11<br><br>
                     <strong>Généré par:</strong> <?= escape($commande['auteur_nom'] . ' ' . $commande['auteur_prenom']) ?><br>
                     <strong>Date de commande:</strong> <?= formatDateTime($commande['date_commande']) ?>
                 </p>

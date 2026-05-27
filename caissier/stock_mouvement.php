@@ -249,8 +249,8 @@ $stats = [
             <i class="bi bi-clock-history me-2"></i>
             Historique des Mouvements (<?= count($mouvements) ?>)
         </h5>
-        <button class="btn btn-outline-success btn-sm" onclick="exportMouvements()">
-            <i class="bi bi-download me-1"></i>Exporter
+        <button class="btn btn-outline-success btn-sm text-light" onclick="exportMouvements()">
+            <i class="bi bi-download me-1 "></i>Exporter
         </button>
     </div>
     <div class="card-body">

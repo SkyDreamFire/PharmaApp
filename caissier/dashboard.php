@@ -36,7 +36,52 @@ $alertes_stock = $db->select("SELECT * FROM stock_alerts ORDER BY stock_actuel A
         <p class="page-subtitle">Bonjour <?= escape($_SESSION['user_prenom']) ?>, bonne journée de travail !</p>
     </div>
 </div>
+<!-- Conseils du jour -->
+<div class="row" style="margin-bottom:30px">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-lightbulb me-2"></i>
+                    Conseils du jour
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex">
+                            <i class="bi bi-shield-check text-success me-3" style="font-size: 1.5rem;"></i>
+                            <div>
+                                <h6>Vérification des dates</h6>
+                                <small class="text-muted">Toujours vérifier les dates d'expiration avant la vente</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex">
+                            <i class="bi bi-person-check text-info me-3" style="font-size: 1.5rem;"></i>
+                            <div>
+                                <h6>Service client</h6>
+                                <small class="text-muted">Demander si le client a des allergies connues</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="d-flex">
+                            <i class="bi bi-clipboard-data text-warning me-3" style="font-size: 1.5rem;"></i>
+                            <div>
+                                <h6>Suivi des stocks</h6>
+                                <small class="text-muted">Signaler les ruptures de stock immédiatement</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+ 
 <div class="alert-container"></div>
 
 <!-- Statistiques principales -->
@@ -142,7 +187,7 @@ $alertes_stock = $db->select("SELECT * FROM stock_alerts ORDER BY stock_actuel A
                     <i class="bi bi-clock-history me-2"></i>
                     Mes Dernières Ventes
                 </h5>
-                <a href="/pharma-app/caissier/facture.php?history=1" class="btn btn-sm btn-outline-primary">
+                <a href="/pharma-app/caissier/facture.php?history=1" class="text-light btn btn-sm btn-outline-primary">
                     Voir tout
                 </a>
             </div>
@@ -224,49 +269,5 @@ $alertes_stock = $db->select("SELECT * FROM stock_alerts ORDER BY stock_actuel A
     </div>
 </div>
 
-<!-- Conseils du jour -->
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="mb-0">
-                    <i class="bi bi-lightbulb me-2"></i>
-                    Conseils du jour
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <div class="d-flex">
-                            <i class="bi bi-shield-check text-success me-3" style="font-size: 1.5rem;"></i>
-                            <div>
-                                <h6>Vérification des dates</h6>
-                                <small class="text-muted">Toujours vérifier les dates d'expiration avant la vente</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="d-flex">
-                            <i class="bi bi-person-check text-info me-3" style="font-size: 1.5rem;"></i>
-                            <div>
-                                <h6>Service client</h6>
-                                <small class="text-muted">Demander si le client a des allergies connues</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="d-flex">
-                            <i class="bi bi-clipboard-data text-warning me-3" style="font-size: 1.5rem;"></i>
-                            <div>
-                                <h6>Suivi des stocks</h6>
-                                <small class="text-muted">Signaler les ruptures de stock immédiatement</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

@@ -323,7 +323,7 @@ function printFacture($db, $id) {
     </head>
     <body>
         <div class="header">
-            <h1>PHARMACIE MANAGEMENT</h1>
+            <h1>FIANGEP PHARMA</h1>
             <h2>FACTURE</h2>
             <p>N° <?= escape($vente['numero_facture']) ?></p>
         </div>
@@ -331,7 +331,7 @@ function printFacture($db, $id) {
         <div class="info">
             <div>
                 <h3>Pharmacie</h3>
-                <p>123 Rue de la Santé<br>75000 Paris<br>Tél: 01 23 45 67 89</p>
+                <p>Quartier Administratif<br>Dschang, Ouest<br>Tél: +237 6 53 36 83 11</p>
             </div>
             <div>
                 <?php if ($vente['client_nom']): ?>
