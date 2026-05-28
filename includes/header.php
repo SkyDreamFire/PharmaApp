@@ -7,6 +7,7 @@ requireLogin();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/pharma-app/image/icon.png" type="image/png">
     <title><?= isset($pageTitle) ? escape($pageTitle) : 'Pharmacie Management' ?></title>
     
     <!-- Bootstrap CSS -->

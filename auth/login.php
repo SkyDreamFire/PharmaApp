@@ -80,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - FIANGEP</title>
+    <link rel="icon" href="../image/icon.png" type="image/png">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -91,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <style>
         body {
             /* Dark overlay + pharmacy‑lab image */
-            background: linear-gradient(rgba(10, 103, 203, 0.3), rgba(96, 29, 111, 0)), url('/pharma-app/image/login.png');
+            background: linear-gradient(rgba(29, 185, 112, 0.27), rgba(28, 173, 45, 0)), url('/pharma-app/image/login.png');
             background-size: cover;
             background-position: right center; /* focus on professional on the right */
             background-repeat: no-repeat;
@@ -131,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         .btn-login {
-            background: linear-gradient(135deg, #1035a3ff 0%, #1766c1ff 100%);
+            background: linear-gradient(135deg, #2da320ff 0%, #42c850ff 100%);
             border: none;
             padding: 0.75rem;
             font-weight: 700;
@@ -182,7 +183,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-card card">
         <div class="card-body p-5">
             <div class="text-center mb-4">
-                <i class="bi bi-capsule-pill brand-logo"></i>
+                <img src="../image/icon.png" alt="image" style="width:80px; height:80px;" >
             <h2 class="h3 mb-3 font-weight-normal">FIANGEP Pharma</h2>
                 <p class="text-muted">Connectez-vous à votre compte</p>
             </div>
