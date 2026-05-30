@@ -1,6 +1,6 @@
 # 🔄 Diagramme d'État-Transition (State-Transition Diagram)
 
-Ce diagramme d'état-transition suit le **cycle de vie complet et l'évolution des états d'un médicament (ou de ses lots de stock)** au sein de l'application **PharmaApp**. Il met en relief l'impact des ventes, du réapprovisionnement, des dates d'expiration (FEFO), ainsi que les décisions d'activation/désactivation prises par le **Directeur**.
+Ce diagramme d'état-transition suit le **cycle de vie complet et l'évolution des états d'un médicament (ou de ses lots de stock)** au sein de l'application **FIANGEP Pharma**. Il met en relief l'impact des ventes, du réapprovisionnement, des dates d'expiration (FEFO), ainsi que les décisions d'activation/désactivation prises par le **Directeur**.
 
 ---
 

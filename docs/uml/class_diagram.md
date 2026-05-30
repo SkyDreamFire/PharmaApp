@@ -1,6 +1,6 @@
 # 📐 Diagramme de Classes (Class Diagram)
 
-Ce diagramme de classes représente la structure logique du domaine et de la persistance de **PharmaApp**. Bien que le projet soit développé en PHP natif procédural/hybride, la base de données relationnelle et la structure d'accès aux données (par le biais du Singleton `Database`) sont modélisables de manière orientée objet, facilitant la compréhension des entités, de leurs attributs et de leurs interrelations.
+Ce diagramme de classes représente la structure logique du domaine et de la persistance de **FIANGEP Pharma**. Bien que le projet soit développé en PHP natif procédural/hybride, la base de données relationnelle et la structure d'accès aux données (par le biais du Singleton `Database`) sont modélisables de manière orientée objet, facilitant la compréhension des entités, de leurs attributs et de leurs interrelations.
 
 ---
 
@@ -10,27 +10,7 @@ Ce diagramme de classes représente la structure logique du domaine et de la per
 classDiagram
     direction TB
 
-    %% Classe Technique d'accès aux données
-    class Database {
-        -static Database instance
-        -PDO connection
-        -string host = "localhost"
-        -string dbname = "pharma_db"
-        -string username = "root"
-        -string password = ""
-        -Database()
-        +static getInstance() Database
-        +getConnection() PDO
-        +selectOne(string sql, array params) array
-        +select(string sql, array params) array
-        +execute(string sql, array params) bool
-        +update(string sql, array params) bool
-        +lastInsertId() string
-        +beginTransaction() bool
-        +commit() bool
-        +rollback() bool
-    }
-
+    
     %% Classes du Domaine (Entités)
     class Utilisateur {
         +int id
@@ -142,11 +122,7 @@ classDiagram
         +float sous_total
     }
 
-    %% Relations d'accès technique
-    Database ..> Medicament : "Gère le cycle CRUD"
-    Database ..> Vente : "Gère l'écriture"
-    Database ..> CommandeFournisseur : "Gère l'écriture"
-    Database ..> Utilisateur : "Valide accès"
+    
 
     %% Associations métier entre classes
     Categorie "1" --> "*" Medicament : "regroupe"

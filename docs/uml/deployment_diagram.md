@@ -1,6 +1,6 @@
 # 🌐 Diagramme de Déploiement (Deployment Diagram)
 
-Ce diagramme de déploiement illustre l'infrastructure matérielle et logicielle sur laquelle l'application **PharmaApp** est installée et exécutée. Il décrit la topologie physique sous forme d'une architecture **3-Tiers**, courante dans les environnements de type **WAMP** (Windows, Apache, MySQL, PHP) ou équivalents (XAMPP, Linux/LAMP, macOS/MAMP).
+Ce diagramme de déploiement illustre l'infrastructure matérielle et logicielle sur laquelle l'application **FIANGEP Pharma** est installée et exécutée. Il décrit la topologie physique sous forme d'une architecture **3-Tiers**, prenant en compte l'hébergement local (WAMP/XAMPP) et la liaison avec la base de données (MySQL local ou Supabase Cloud).
 
 ---
 
@@ -9,7 +9,7 @@ Ce diagramme de déploiement illustre l'infrastructure matérielle et logicielle
 ```mermaid
 flowchart TB
     %% Définitions de styles
-    classDef device fill:#eff6ff,stroke:#1d4ed8,stroke-width:2px,color:#1e3a8a,rx:8px,ry:8px;
+    classDef device fill:#eff6ff,stroke:#22c55e,stroke-width:2px,color:#1e3a8a,rx:8px,ry:8px;
     classDef nodeServer fill:#fdf4ff,stroke:#a21caf,stroke-width:2px,color:#4a044e,rx:8px,ry:8px;
     classDef runEnv fill:#faf5ff,stroke:#d946ef,stroke-width:1.5px,stroke-dasharray: 5 5,color:#701a75;
     classDef artifact fill:#fafafa,stroke:#52525b,stroke-width:1.5px,color:#18181b;
@@ -29,7 +29,7 @@ flowchart TB
             direction TB
             PHPEngine["🚀 Environnement d'Exécution : PHP 7.4+ Runtime"]:::runEnv
             
-            subgraph WebApp_Files["📦 Artefact : Fichiers Sources PharmaApp"]
+            subgraph WebApp_Files["📦 Artefact : Fichiers Sources FIANGEP Pharma"]
                 direction LR
                 PHPFiles["📄 Scripts PHP (*.php)"]:::artifact
                 JSFiles["📄 Scripts JS (*.js)"]:::artifact
@@ -40,21 +40,21 @@ flowchart TB
         end
     end
 
-    %% Nœud Serveur Base de données (MySQL)
-    subgraph DB_Server["🗄️ Nœud Matériel : Serveur de Base de Données (MySQL / MariaDB Hôte)"]
+    %% Nœud Serveur Base de données (MySQL / Supabase)
+    subgraph DB_Server["🗄️ Nœud Matériel : Serveur de Base de Données (MySQL Local / Supabase Cloud)"]
         direction TB
         
-        subgraph DBMS["🔌 SGBDR Node : MySQL Server Engine"]
-            DBSchema[("🗃️ Base de données : pharma_db<br/>(Tables, Clés, Index, Contraintes)")]:::db
+        subgraph DBMS["🔌 SGBDR Node : MySQL Engine / Supabase PostgreSQL"]
+            DBSchema[("🗃️ Base de données : pharma_db / postgres<br/>(Tables, Clés, Index, Contraintes)")]:::db
         end
     end
 
     %% Connexions physiques / protocoles de communication
-    Browser ====>|Procolole : HTTP / HTTPS<br/>Ports : 80 / 443| Web_Server
-    PHPEngine ====>|Protocole TCP/IP via PDO Driver - Port 3306 localhost| DBMS
+    Browser ====>|Protocole : HTTP / HTTPS<br/>Ports : 80 / 443| Web_Server
+    PHPEngine ====>|Protocole TCP/IP via PDO Driver - Port 3306 localhost / Cloud SSL| DBMS
 
     %% Styles des subgraphs globaux
-    style Client_Device fill:#f8fafc,stroke:#3b82f6,stroke-width:2px;
+    style Client_Device fill:#f8fafc,stroke:#22c55e,stroke-width:2px;
     style App_Server fill:#fdf4ff,stroke:#c084fc,stroke-width:2px;
     style DB_Server fill:#f0fdf4,stroke:#4ade80,stroke-width:2px;
 ```
@@ -72,7 +72,7 @@ Hébergé sous un environnement WAMP ou XAMPP :
 * **Moteur d'Exécution PHP 7.4+** : Compile et exécute les scripts côté serveur, traite les sessions de connexion et produit le code HTML dynamique renvoyé au client.
 
 ### 3. Le Serveur de Base de Données (`Serveur de Base de Données`)
-Géré par l'instance **MySQL/MariaDB** :
+Géré par l'instance **MySQL/MariaDB** en local, ou par **Supabase (PostgreSQL Cloud)** :
 * Dans une configuration locale de développement (comme configuré dans `includes/db.php`), le serveur MySQL tourne sur la même machine physique (`localhost` / `127.0.0.1`).
-* En production, le nœud MySQL peut être dissocié sur un serveur de base de données dédié pour des raisons de performance et de sécurité renforcée, la liaison s'effectuant en réseau interne via le driver PDO en TCP/IP (port `3306`).
-* Il héberge la base de données relationnelle structurée `pharma_db` qui maintient l'intégrité transactionnelle (ACID) indispensable pour assurer qu'aucune transaction de vente ne soit enregistrée si la mise à jour des stocks échoue.
+* En production ou en cours de migration, le serveur s'appuie sur **Supabase** (comme indiqué par les migrations du dossier `supabase/migrations/`), déportant la base de données sur une infrastructure Cloud managée en réseau sécurisé SSL (TCP/IP).
+* Il héberge la base de données relationnelle structurée qui maintient l'intégrité transactionnelle (ACID) indispensable pour assurer qu'aucune transaction de vente ou de commande ne soit corrompue en cas de panne réseau intermédiaire.

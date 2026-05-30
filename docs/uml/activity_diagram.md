@@ -10,7 +10,7 @@ Ce diagramme d'activité détaille le flux opérationnel et logique lors de **la
 flowchart TD
     %% Définitions de style
     classDef start_end fill:#1e293b,stroke:#0f172a,stroke-width:2px,color:#fff,rx:20px,ry:20px;
-    classDef action fill:#f8fafc,stroke:#3b82f6,stroke-width:1.5px,color:#0f172a;
+    classDef action fill:#f8fafc,stroke:#22c55e,stroke-width:1.5px,color:#0f172a;
     classDef decision fill:#fffbeb,stroke:#d97706,stroke-width:1.5px,color:#78350f,shape:diamond;
     classDef storage fill:#ecfdf5,stroke:#10b981,stroke-width:1.5px,color:#064e3b;
 
@@ -123,7 +123,7 @@ flowchart TD
     A8 --> End
 
     %% Styles supplémentaires pour le rendu
-    style CaissFE fill:#eff6ff,stroke:#bfdbfe,stroke-width:2px;
+    style CaissFE fill:#f0fdf4,stroke:#bbf7d0,stroke-width:2px;
     style ServeurBE fill:#fafafa,stroke:#e4e4e7,stroke-width:2px;
 ```
 

@@ -1,6 +1,6 @@
 # 📊 Diagramme de Cas d'Utilisation (Use Case Diagram)
 
-Ce diagramme modélise les fonctionnalités du système **PharmaApp** du point de vue des acteurs et utilisateurs. Il inclut désormais le nouveau rôle **Magasinier**.
+Ce diagramme modélise les fonctionnalités du système **FIANGEP Pharma** du point de vue des acteurs et utilisateurs. Il inclut désormais le nouveau rôle **Magasinier**.
 
 ---
 
@@ -9,7 +9,7 @@ Ce diagramme modélise les fonctionnalités du système **PharmaApp** du point d
 ```mermaid
 graph LR
     %% Définition des styles visuels
-    classDef actor fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#fff,rx:8px,ry:8px;
+    classDef actor fill:#1e293b,stroke:#22c55e,stroke-width:2px,color:#fff,rx:8px,ry:8px;
     classDef usecase fill:#f8fafc,stroke:#10b981,stroke-width:1.5px,color:#0f172a,rx:20px,ry:20px;
     classDef system fill:#f1f5f9,stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5;
 
@@ -19,7 +19,7 @@ graph LR
     Caissier["👤 Caissier"]:::actor
 
     %% Système
-    subgraph SysPharma["Système PharmaApp"]
+    subgraph SysPharma["Système FIANGEP Pharma"]
         direction TB
         
         %% Authentification

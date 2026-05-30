@@ -1,10 +1,14 @@
-# 🔄 Diagramme de Séquence (Sequence Diagram)
+# 🔄 Diagrammes de Séquence (Sequence Diagrams)
 
-Ce diagramme de séquence illustre la cinématique d'interaction lors de la **création d'une facture de vente** par un **Caissier**, depuis l'interface utilisateur JavaScript jusqu'à l'exécution de la logique de déstockage **FEFO** (*First Expired, First Out*) et la génération du reçu d'impression.
+Ce document regroupe les diagrammes de séquence clés de l'application **FIANGEP Pharma**, illustrant la dynamique des interactions logiques du système.
 
 ---
 
-## 🧜‍♂️ Diagramme Mermaid
+## 1. Vente et Déstockage FEFO
+
+Ce diagramme illustre la cinématique lors de la **création d'une facture de vente** par un **Caissier**, de l'interface JavaScript à la logique de déstockage **FEFO** (*First Expired, First Out*) et au reçu d'impression.
+
+### 🧜‍♂️ Diagramme Mermaid
 
 ```mermaid
 sequenceDiagram
@@ -72,20 +76,75 @@ sequenceDiagram
     deactivate PrintAPI
 ```
 
+### 🔍 Analyse Technique du Flux
+1. **Validation Front-End** : L'interface JS locale (`caissier/facture.php`) suit l'état du panier dans la variable globale `panier`. La fonction `ajouterAuPanier` s'assure qu'on ne dépasse pas le stock réel cumulé disponible (`stock_total = ancien_stock + nouveau_stock`).
+2. **Soumission Sérialisée** : Pour éviter de multiples requêtes AJAX, l'application utilise une soumission classique de formulaire POST en injectant le panier sous forme de chaîne JSON dans un champ caché `<input type="hidden" name="articles">`.
+3. **Transaction et Rétablissement** : La transaction PDO garantit l'atomicité. Si un médicament présente un défaut de stock ou si l'une des écritures de lignes échoue, l'exception est interceptée, et le bloc `catch` exécute un `$db->rollback()`.
+4. **Ventilation FEFO dans la Boucle** : La fonction `effectuerSortieFEFO` récupère l'état courant en BDD et décide du lot prioritaire : si l'ancien stock expire avant, on retire en priorité de `ancien_stock`. Si la quantité demandée dépasse l'ancien stock, le reliquat est déduit de `nouveau_stock`.
+
 ---
 
-## 🔍 Analyse Technique du Flux
+## 2. Authentification et Session
 
-1. **Validation Front-End (Étapes 1-2)** :
-   L'interface JS locale (`caissier/facture.php`) suit l'état du panier dans la variable globale `panier`. La fonction `ajouterAuPanier` s'assure qu'on ne dépasse pas le stock réel cumulé disponible (`stock_total = ancien_stock + nouveau_stock`).
+Ce diagramme décrit la cinématique de **connexion d'un utilisateur** via `auth/login.php`, incluant la vérification CSRF, l'authentification sécurisée en base de données et la redirection par rôle.
 
-2. **Soumission Sérialisée (Étape 6)** :
-   Pour éviter de multiples requêtes AJAX asynchrones complexes, l'application utilise une soumission classique de formulaire POST en injectant le panier sous forme de chaîne JSON dans un champ caché `<input type="hidden" name="articles">`.
+### 🧜‍♂️ Diagramme Mermaid
 
-3. **Transaction et Rétablissement (Étapes 7-21)** :
-   La transaction PDO garantit l'atomicité. Si un médicament présente un défaut de stock ou si l'une des écritures de lignes échoue, l'exception est interceptée, et le bloc `catch` exécute un `$db->rollback()` pour annuler toutes les modifications précédentes (comme la création de la ligne `ventes` ou des premiers détails).
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as 👤 Utilisateur
+    participant F as 🖥️ Formulaire (login.php)
+    participant C as 🧠 Fonctions Auth (functions.php)
+    participant DB as 🗄️ Singleton Database (db.php)
 
-4. **Ventilation FEFO dans la Boucle (Étapes 13-19)** :
-   C'est le cœur de l'intelligence métier. La fonction `effectuerSortieFEFO` récupère l'état courant en BDD et décide du lot prioritaire.
-   * Si l'ancien stock expire avant, on retire en priorité de `ancien_stock`. Si la quantité demandée dépasse l'ancien stock, le reliquat est déduit de `nouveau_stock`.
-   * Cette mise à jour est immédiatement répercutée via un `UPDATE` en SQL, et un mouvement de stock avec le type `sortie` est tracé.
+    U->>F: Accède à la page de connexion
+    activate F
+    F->>C: isLoggedIn() (Vérifie si déjà connecté)
+    activate C
+    C-->>F: Retourne false
+    deactivate C
+    F->>F: Génère et stocke csrf_token dans $_SESSION
+    F-->>U: Affiche la page de connexion (HTML)
+    deactivate F
+
+    U->>F: Remplit les identifiants & valide (POST)
+    activate F
+    
+    F->>F: Valide le token CSRF (hash_equals)
+    
+    alt CSRF Invalide
+        F-->>U: Affiche l'erreur CSRF (Veuillez actualiser)
+    else CSRF Valide
+        F->>DB: selectOne(SELECT ... FROM users WHERE username/email AND actif = 1)
+        activate DB
+        DB-->>F: Retourne les données de l'utilisateur (id, password_hash, role...)
+        deactivate DB
+        
+        alt Utilisateur non trouvé
+            F-->>U: Affiche "Identifiants ou mot de passe incorrect."
+        else Utilisateur trouvé
+            F->>F: password_verify(mot_de_passe, password_hash)
+            
+            alt Mot de passe incorrect
+                F-->>U: Affiche "Identifiants ou mot de passe incorrect."
+            else Mot de passe correct
+                opt password_needs_rehash()
+                    F->>DB: execute(UPDATE users SET password = newHash WHERE id)
+                end
+                
+                F->>F: Initialise $_SESSION (user_id, user_role, prenom...)
+                F->>C: redirectByRole()
+                activate C
+                C-->>U: Redirection HTTP (302 vers Dashboard)
+                deactivate C
+            end
+        end
+    end
+    deactivate F
+```
+
+### 🔍 Analyse Technique du Flux
+1. **Protection CSRF** : Pour se prémunir des attaques CSRF (Cross-Site Request Forgery), l'application génère un token aléatoire unique dans la session et l'inclut en champ masqué dans le formulaire de connexion. Ce token est vérifié avec `hash_equals()` pour éviter toute attaque de type canal auxiliaire ou timing.
+2. **Authentification Hybride (Username / Email)** : La requête SQL cherche de manière transparente soit par le nom d'utilisateur, soit par l'email saisi, à condition que le compte soit marqué comme actif (`actif = 1`).
+3. **Sécurité Cryptographique** : Les mots de passe ne sont jamais comparés en clair. L'application s'appuie sur `password_verify()` qui s'assure d'une vérification sécurisée contre le hash cryptographique (généralement Bcrypt). De plus, si l'algorithme par défaut de PHP évolue, `password_needs_rehash()` permet de réévaluer et de mettre à jour dynamiquement la clé de sécurité.
